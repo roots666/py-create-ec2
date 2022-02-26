@@ -1,0 +1,12 @@
+# Install awscli
+curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
+unzip -q /tmp/awscliv2.zip -d /tmp && /tmp/aws/install
+ 
+# Install Python38
+amazon-linux-extras install python3.8 -y
+ 
+# Install Docker on ec2 instance:
+yum update -y && \
+yum -y install docker && \
+service docker start && \
+usermod -a -G docker ec2-user
