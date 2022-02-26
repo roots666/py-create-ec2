@@ -11,6 +11,8 @@ parser.add_argument('-r','--region', action='store', dest='region', type=str,
                     help='AWS Region. Use like: -r ap-southeast-1', default='us-east-1')
 parser.add_argument('-a','--ami', action='store', dest='ami_filter', type=str,
                     help='AWS AMI. Use like: -a amzn2-ami-hvm-2.0.????????-x86_64-gp2', default='amzn2-ami-hvm-2.0.????????-x86_64-gp2')
+parser.add_argument('-t','--type', action='store', dest='type', type=str,
+                    help='AWS instance type. Use like: -t t2.nano', default='t2.micro')
 parser.add_argument('-n','--num', action='store', dest='num', type=int,
                     help='number of ec2 instances. Use like: -n 2', default=1)
 arg = parser.parse_args()
@@ -111,7 +113,7 @@ security_group.create_tags(Tags=[{"Key": "Name", "Value": "myvpc_security_group"
 def ec2_instance_create():
     ec2_instance = ec2_resource.create_instances(
         ImageId=ec2_ami_id,
-        InstanceType='t2.micro',
+        InstanceType=arg.type,
         KeyName='my_keypair',
         Monitoring={'Enabled':False},
         SecurityGroupIds=[security_group.id],
