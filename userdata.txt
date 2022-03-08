@@ -1,10 +1,11 @@
-# Install awscli
-curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip"
-unzip -q /tmp/awscliv2.zip -d /tmp && /tmp/aws/install
+#!/bin/bash
+
+# Install git
+yum update -y
+yum install -y git
  
-# Install Python38
-amazon-linux-extras install python3.8 -y
- 
-# Install protonvpn on ec2 instance:
-yum install -y openvpn dialog python3-pip python3-setuptools
-pip3 install protonvpn-cli
+# Install Docker on ec2 instance:
+
+yum install -y docker && \
+service docker start && \
+usermod -a -G docker ec2-user
